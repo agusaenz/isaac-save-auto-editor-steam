@@ -1,4 +1,4 @@
-# isaac-save-auto-editor-steam
+# Post-it for Dummies
 This is a The Binding of Isaac: Repentance and Repentance+ tool that automatically edits your save file **based on your Steam achievements** for the game, by using the Steam Web API. It will properly set your post-it notes for each character (normal and tainted), as well as your challenges, all acording to your Steam achievements.
 
 This is a modification of this jamesthejellyfish's manual editor tool and relies on his source code for altering the saves: https://github.com/jamesthejellyfish/isaac-save-edit-script
