@@ -19,7 +19,7 @@ There is some stuff you need to gather and prepare before using this tool.
 
 ## First steps
 
-### 1. Use a new save file
+### 1. Use a new save file * Optional *
 It is **highly** recommended to use a new empty file. 
 
 Go into the game and delete one save that you don't currently use. After that, select it, go to stats and press Alt + F2. This will update the secrets of the file with your Steam achievements, so that you can have your corresponding characters and challenges unlocked (but not crossed out). After that, **close** the game.
@@ -61,7 +61,7 @@ You want to go ahead and paste both your Steam ID and API key into their respect
 
 The file location is: {Steam installation disk}/Steam/userdata/{user}/250900/remote
 
-And the file name is either **rep_persistentgamedata{1|2|3}.dat** for Repentance, or **rep+persistentgamedata{1|2|3}.dat** for Repentace+ (online beta). The {1|2|3} refers to which of the 3 saves you want to select. Make sure it is the same one you prepared. Once again, please make sure to **make a backup** of your files before proceeding.
+And the file name is either **rep_persistentgamedata{1|2|3}.dat** for Repentance, or **rep+persistentgamedata{1|2|3}.dat** for Repentace+ (online beta). The {1|2|3} refers to which of the 3 saves you want to select. Make sure it is the same one you prepared (optional step). Once again, please make sure to **make a backup** of your files before proceeding.
 
 <img src="https://github.com/agusaenz/isaac-save-auto-editor-steam/blob/main/assets/run-script.png">
 
