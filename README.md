@@ -81,6 +81,6 @@ Isaac, ???, Satan and The Lamb -> 1 achievement once all 4 have been defeated
 
 Boss Rush and Hush -> 1 achievement if both have been killed
 
-Because of this, tainted post-its will not be 100% accurate. For example, if you killed Mom's Heart, Satan, The Lamb and Mega Satan with Tainted Keeper, only Mega Satan note will appear in your post-it. Same thing would happen if you did Boss Rush but not Hush. Unfortunately this can't be traced through this system.
+Because of this, tainted post-its will not be 100% accurate until you get those achievemens out of the way. For example, if you killed Mom's Heart, Satan, The Lamb and Mega Satan with Tainted Keeper, only Mega Satan note will appear in your post-it. Same thing would happen if you did Boss Rush but not Hush. Unfortunately this can't be traced through this system.
 
-**Note**: you will get Mom's Heart mark for tainted characters only if you have the achievement for killing Isaac, ???, Satan and The Lamb.
+**Note**: you will get Mom's Heart mark for tainted characters only if you have the achievement for killing Isaac, ???, Satan and The Lamb, and the same will happen with the other example. But don't worry, once you have the proper achievements it will correctly show it.
