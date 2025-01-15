@@ -20,7 +20,7 @@ There is some stuff you need to gather and prepare before using this tool.
 ## First steps
 
 ### 1. Use a new save file * Optional *
-It is **highly** recommended to use a new empty file. 
+It is recommended to use a new empty file, although you can use it in your main file (making a backup first) so that you don't lose your Eden tokens, as well as your progress in donation and Greed machines.
 
 Go into the game and delete one save that you don't currently use. After that, select it, go to stats and press Alt + F2. This will update the secrets of the file with your Steam achievements, so that you can have your corresponding characters and challenges unlocked (but not crossed out). After that, **close** the game.
 
