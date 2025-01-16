@@ -1,12 +1,13 @@
 import requests
 import re
 import tkinter as tk
-from tkinter import filedialog, messagebox
+import webbrowser
+from tkinter import filedialog, messagebox, PhotoImage
 
 # file location
 # {steam_installation_path})\Steam\userdata\{user}\250900\remote
 
-_debug = True
+_debug = False
 
 # ------------- DATA -------------
 
@@ -429,14 +430,18 @@ def updateChallengesArray(data, user_achievements):
     return updateChallenges(data, completed_challenges)
 
 # ------------- GUI -------------
-
+STYLE = {
+    "font" : "Candara",
+    "bg" : "#121212",
+    "fg" : "#84C9FB"
+    }
 def runScript():
     steam_id = entry1.get()
     api_key = entry2.get()
     file_path = file_var.get()
 
     if not steam_id and not api_key and not file_path:
-        messagebox.showerror("Error", "All fields are required!")
+        messagebox.showerror(title="ERROR",message="All fields are required!")
         return
 
     try:
@@ -479,23 +484,30 @@ def browseFile():
         file_var.set(file_path)
 
 # main Tkinter window
+
+def open_url():
+    webbrowser.open("https://cran.r-project.org/web/packages/CSGo/vignettes/auth.html")  # URL to open when button is pressed
 root = tk.Tk()
 root.title("Post-it for Dummies")
+root.configure(bg="#121212")
+root.iconbitmap(r"assets\rune_05_ansuz.ico")
 
 # GUI elements
-tk.Label(root, text="Steam ID:").grid(row=0, column=0, padx=10, pady=5, sticky="w")
-entry1 = tk.Entry(root, width=40)
-entry1.grid(row=0, column=1, padx=10, pady=5)
+tk.Label(root, text="Steam ID:",**STYLE).grid(row=0, column=0, padx=10, pady=5, sticky="w")
+entry1 = tk.Entry(root, width=40, **STYLE)
+entry1.grid(row=0, column=1, padx=10, pady=5,)
 
-tk.Label(root, text="Steam Web API key:").grid(row=1, column=0, padx=10, pady=5, sticky="w")
-entry2 = tk.Entry(root, width=40)
+tk.Label(root, text="Steam Web API key:",**STYLE).grid(row=1, column=0, padx=10, pady=5, sticky="w")
+entry2 = tk.Entry(root, width=40,**STYLE)
 entry2.grid(row=1, column=1, padx=10, pady=5)
+questionimage = PhotoImage(file=r"assets\questionmark.png")
+tk.Button(root,image= questionimage, relief=tk.FLAT,**STYLE,activebackground="#121212",command= open_url).grid(row=1, column= 2, padx=10, pady=5)
 
-tk.Label(root, text="Select Save File:").grid(row=2, column=0, padx=10, pady=5, sticky="w")
+tk.Label(root, text="Select Save File:",**STYLE).grid(row=2, column=0, padx=10, pady=5, sticky="w")
 file_var = tk.StringVar()
-tk.Entry(root, textvariable=file_var, width=40).grid(row=2, column=1, padx=10, pady=5)
-tk.Button(root, text="Browse", command=browseFile).grid(row=2, column=2, padx=10, pady=5)
+tk.Entry(root, textvariable=file_var, width=40, **STYLE).grid(row=2, column=1, padx=10, pady=5)
+tk.Button(root, text="Browse", command=browseFile, **STYLE).grid(row=2, column=2, padx=10, pady=5)
 
-tk.Button(root, text="Run Script", command=runScript).grid(row=3, column=1, pady=20)
+tk.Button(root, text="Run Script", command=runScript, **STYLE).grid(row=3, column=1, pady=20)
 
 root.mainloop()
