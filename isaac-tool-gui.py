@@ -470,8 +470,8 @@ tk.Button(root,image= questionimage, relief=tk.FLAT,**STYLE,activebackground="#1
 tk.Label(root, text="Select Save File:",**STYLE).grid(row=2, column=0, padx=10, pady=5, sticky="w")
 file_var = tk.StringVar()
 tk.Entry(root, textvariable=file_var, width=40, **STYLE).grid(row=2, column=1, padx=10, pady=5)
-tk.Button(root, text="Browse", command=browseFile, **STYLE).grid(row=2, column=2, padx=10, pady=5)
+tk.Button(root, text="Browse", command=browseFile, **STYLE, activebackground="#121212", activeforeground="#84C9FB").grid(row=2, column=2, padx=10, pady=5)
 
-tk.Button(root, text="Run Script", command=runScript, **STYLE).grid(row=3, column=1, pady=20)
+tk.Button(root, text="Run Script", command=runScript, **STYLE, activebackground="#121212", activeforeground="#84C9FB").grid(row=3, column=1, pady=20)
 
 root.mainloop()
