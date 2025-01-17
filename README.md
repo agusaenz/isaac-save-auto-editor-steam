@@ -11,7 +11,7 @@ This is an application of the old editor from Afterbirth https://moddingofisaac.
 
 # Running
 
-I'm providing both a basic Graphical User Interface, which you can download here: _https://github.com/agusaenz/isaac-save-auto-editor-steam/releases/tag/v0.1_ and then open _isaac-tool.exe_, as well as the code to run with Python (I will be going through this after the GUI tutorial).
+I'm providing both a basic Graphical User Interface, which you can download here: _https://github.com/agusaenz/isaac-save-auto-editor-steam/releases/tag/v1.0_ and then open _isaac-tool.exe_, as well as the code to run with Python (I will be going through this after the GUI tutorial).
 
 # How to use
 
