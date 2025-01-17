@@ -1,7 +1,7 @@
 # Post-it for Dummies
 Post-it for Dummies is a The Binding of Isaac: Repentance and Repentance+ tool that automatically edits your save file **based on your Steam achievements** for the game, by using the Steam Web API. It will properly set your **post-it notes** for each character (normal and tainted), as well as your **challenges**, all acording to your Steam achievements.
 
-This is a modification of this jamesthejellyfish's manual editor tool and relies on his source code for altering the saves: https://github.com/jamesthejellyfish/isaac-save-edit-script
+This is an application of the old editor from Afterbirth https://moddingofisaac.com/mod/3236/afterbirth-save-editor-v10
     
 **Please read this to the end, as I will be going through every detail, doing a step by step guide and addressing known "issues".**
 
@@ -20,7 +20,9 @@ There is some stuff you need to gather and prepare before using this tool.
 ## First steps
 
 ### 1. Use a new save file * Optional *
-It is recommended to use a new empty file, although you can use it in your main file (making a backup first) so that you don't lose your Eden tokens, as well as your progress in donation and Greed machines.
+You should be able to use the tool in your main file (making a backup first) so that you don't lose your Eden tokens, as well as your progress in donation and Greed machines. Just press Alt + F2 in the stats tab of your file (in game) to make sure everything is in sync with your achievements (characters and challenges unlocked, not crossed out).
+
+-- Optional for new file:
 
 Go into the game and delete one save that you don't currently use. After that, select it, go to stats and press Alt + F2. This will update the secrets of the file with your Steam achievements, so that you can have your corresponding characters and challenges unlocked (but not crossed out). After that, **close** the game.
 

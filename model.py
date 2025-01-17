@@ -1,6 +1,5 @@
 import requests
 import re
-from tkinter import messagebox
 
 from constants import ALL_CHALLENGES_ACHIEVEMENTS, CHARACTERS_ACHIEVEMENTS
 
@@ -116,13 +115,9 @@ def calcAfterbirthChecksum(data, ofs, length):
     return ~checksum + 2 ** 32
 
 def getInt(data, offset, debug=False, num_bytes=2):
-    if debug: print(f"current value: {int.from_bytes(data[offset:offset+num_bytes], 'little', signed=False)}")
     return int.from_bytes(data[offset:offset+num_bytes], 'little')
 
 def alterInt(data, offset, new_val, debug=False, num_bytes=2):
-    if debug:
-        print(f"current value: {int.from_bytes(data[offset:offset+num_bytes], 'little')}")
-        print(f"new value: {new_val}")
     return data[:offset] + new_val.to_bytes(num_bytes, 'little', signed=True) + data[offset + num_bytes:]
 
 def alterChallenge(data, challenge_index, unlock=True):
@@ -145,10 +140,6 @@ def updateChecksum(data):
     return data[:offset + length] + calcAfterbirthChecksum(data, offset, length).to_bytes(5, 'little', signed=True)[:4]
 
 # ------------- MISC FUNCTIONS -------------
-
-def writeToFile(data, filename):
-    with open(filename, 'wb') as file:
-        file.write(updateChecksum(data))
 
 def getAchievements(steam_id, api_key):
     user_achievements = []
@@ -179,23 +170,18 @@ def getAchievements(steam_id, api_key):
                 if user_achievements:
                     return user_achievements
                 else:
-                    messagebox.showerror("Error", "No player achievements unlocked.")
-                    return user_achievements
+                    return "no_achievements"
             else:
-                messagebox.showerror("Error", "No achievements found for this game.")
-                return user_achievements
+                return "api_error"
         else:
-            messagebox.showerror("Error", "No player stats found.")
-            return user_achievements
+            return "api_error"
     elif response.status_code == 403:
             data = response.json()
             if 'playerstats' in data:
                 if 'success' in data['playerstats'] and data['playerstats']['success'] == False:
-                    messagebox.showerror("Error", f"Steam user profile or game details are private. Please make sure your profile and game stats are set to public.")
-                    return user_achievements
+                    return "private_profile"
     else:
-        messagebox.showerror("Error", f"An error occurred while fetching the achievements. Please verify your Steam ID and API key.")
-        return user_achievements     
+        return "api_error"   
         
 def isSteamID64(input_value):
     """
@@ -227,13 +213,10 @@ def getSteamID64(steam_id, api_key):
                 if success == 1:
                     return response_data['steamid']
                 else:
-                    # print("Error: Steam ID not found.")
                     return None
             else:
-                # print("Error: 'success' key not found in response data.")
                 return None
         else:
-            # print("Error: 'response' key not found in data.")
             return None
 
 # ------------- POST-IT FUNCTIONS -------------
@@ -367,45 +350,3 @@ def updateChallengesArray(data, user_achievements):
         print(completed_challenges)
 
     return updateChallenges(data, completed_challenges)
-
-# ------------- MAIN FUNCTION -------------
-
-def runScript(steam_id, api_key, file_path):
-
-    if steam_id == "" or api_key == "" or file_path == "":
-        messagebox.showerror("Error", "Please fill in all the fields.")
-        return
-
-    try:
-        offset = 0x10
-        with open(file_path, "rb") as file:
-            data = file.read()
-            length = len(data) - offset - 4
-            checksum = calcAfterbirthChecksum(data, offset, length).to_bytes(5, 'little', signed=True)[:4]
-            # print(checksum)
-            old_checksum = data[offset + length:]
-
-        if not isSteamID64(steam_id):
-            steam_id_64 = getSteamID64(steam_id, api_key)
-
-            if steam_id_64:
-                user_achievements = getAchievements(steam_id_64, api_key)
-            else:
-                messagebox.showerror("Error", "Steam ID64 not found.")
-                return
-        else:
-            user_achievements = getAchievements(steam_id, api_key)
-
-        if user_achievements != []:
-            # post-it
-            data = updatePostIt(data, user_achievements)
-
-            # challenges
-            data = updateChallengesArray(data, user_achievements)
-
-            writeToFile(data, file_path)
-            delUserPostIt()
-
-            messagebox.showinfo("Success", "Save file synchronized succesfully!")
-    except Exception as e:
-        messagebox.showerror("Error", f"An error occurred while fetching the achievements. Please verify your Steam ID and API key.")
