@@ -7,7 +7,7 @@ This is a modification of this jamesthejellyfish's manual editor tool and relies
 
 **As expected, make sure to backup your original save files before using this tool.**
 
-<img src="https://github.com/agusaenz/isaac-save-auto-editor-steam/blob/main/assets/basic-gui.png">
+<img src="https://github.com/agusaenz/isaac-save-auto-editor-steam/blob/main/assets/readme/basic-gui.png">
 
 # Running
 
@@ -29,7 +29,7 @@ In order for the Steam Web API to be able to gather your achievements, you will 
 
 Go to your Steam profile -> Edit profile - > Privacy Settings, and then set _My profile_ and _Game details_ to **public**, as shown in the image:
 
-<img src="https://github.com/agusaenz/isaac-save-auto-editor-steam/blob/main/assets/privacy-settings.png">
+<img src="https://github.com/agusaenz/isaac-save-auto-editor-steam/blob/main/assets/readme/privacy-settings.png">
 
 ### 3. Get your Steam ID
 You can easily find this by going to your Steam profile and looking at the url.
@@ -47,9 +47,9 @@ If you already have one, then you can use yours. If not, it is really simple to 
 Go to this link (official Steam website): https://steamcommunity.com/dev/apikey and log in to your account if you are not already, or you can also drag the link to your Steam Client.
 Once you are there, you will either see your key or you will be able to request one by filling a "Domain Name" where you can write whatever and click "Register":
 
-<img src="https://github.com/agusaenz/isaac-save-auto-editor-steam/blob/main/assets/api-key.png">
+<img src="https://github.com/agusaenz/isaac-save-auto-editor-steam/blob/main/assets/readme/api-key.png">
 
-<img src="https://github.com/agusaenz/isaac-save-auto-editor-steam/blob/main/assets/api-key-2.png">
+<img src="https://github.com/agusaenz/isaac-save-auto-editor-steam/blob/main/assets/readme/api-key-2.png">
 
 **WARNING!** Do NOT share this with anybody you do not know, as this key is private and any wrongdoing (like surpassing the limit of requests) in the Steam Web API can get you banned from using it. Needless to say, **I do not store any key a user inputs in this tool**. The program runs 100% locally and the source code is there for you to see.
 
@@ -63,11 +63,11 @@ The file location is: {Steam installation disk}/Steam/userdata/{user}/250900/rem
 
 And the file name is either **rep_persistentgamedata{1|2|3}.dat** for Repentance, or **rep+persistentgamedata{1|2|3}.dat** for Repentace+ (online beta). The {1|2|3} refers to which of the 3 saves you want to select. Make sure it is the same one you prepared (optional step). Once again, please make sure to **make a backup** of your files before proceeding.
 
-<img src="https://github.com/agusaenz/isaac-save-auto-editor-steam/blob/main/assets/run-script.png">
+<img src="https://github.com/agusaenz/isaac-save-auto-editor-steam/blob/main/assets/readme/run-script.png">
 
 When it is all set, simply click the button "Run Script" and it will automatically edit your save. Just run the game and check it out!
 
-<img src="https://github.com/agusaenz/isaac-save-auto-editor-steam/blob/main/assets/success.png">
+<img src="https://github.com/agusaenz/isaac-save-auto-editor-steam/blob/main/assets/readme/success.png">
 
 # Known issues
 
