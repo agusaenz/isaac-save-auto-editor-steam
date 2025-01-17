@@ -394,10 +394,27 @@ def updateChallengesArray(data, user_achievements):
     return updateChallenges(data, completed_challenges)
 
 # ------------- GUI -------------
+BACKGROUND= "#313338"
+FONT= ("Candara")
+WIDGET_BACKGROUND= "#404249"
+FONT_COLOR= "white" 
 STYLE = {
+    "font" : FONT,
+    "bg" : BACKGROUND,
+    "fg" : "white"
+    }
+STYLE_ENTRY = {
     "font" : "Candara",
-    "bg" : "#121212",
-    "fg" : "#84C9FB"
+    "bg" : WIDGET_BACKGROUND,
+    "fg" : FONT_COLOR
+    }
+STYLE_BUTTON = {
+    "font" : "Candara",
+    "bg" : WIDGET_BACKGROUND,
+    "fg" : FONT_COLOR,
+    "activebackground" : WIDGET_BACKGROUND,
+    "activeforeground" : FONT_COLOR,
+    "cursor" : "hand2"
     }
 def runScript():
     steam_id = entry1.get()
@@ -450,28 +467,28 @@ def browseFile():
 # main Tkinter window
 
 def open_url():
-    webbrowser.open("https://cran.r-project.org/web/packages/CSGo/vignettes/auth.html")  # URL to open when button is pressed
+    webbrowser.open('https://github.com/agusaenz/isaac-save-auto-editor-steam?tab=readme-ov-file#4-obtain-a-steam-web-api-key')
 root = tk.Tk()
 root.title("Post-it for Dummies")
-root.configure(bg="#121212")
+root.configure(bg=BACKGROUND)
 root.iconbitmap(r"assets\rune_05_ansuz.ico")
 
 # GUI elements
 tk.Label(root, text="Steam ID:",**STYLE).grid(row=0, column=0, padx=10, pady=5, sticky="w")
-entry1 = tk.Entry(root, width=40, **STYLE)
+entry1 = tk.Entry(root, width=40, **STYLE_ENTRY,relief= tk.FLAT)
 entry1.grid(row=0, column=1, padx=10, pady=5,)
 
 tk.Label(root, text="Steam Web API key:",**STYLE).grid(row=1, column=0, padx=10, pady=5, sticky="w")
-entry2 = tk.Entry(root, width=40,**STYLE)
+entry2 = tk.Entry(root, width=40,**STYLE_ENTRY,relief= tk.FLAT)
 entry2.grid(row=1, column=1, padx=10, pady=5)
 questionimage = PhotoImage(file=r"assets\questionmark.png")
-tk.Button(root,image= questionimage, relief=tk.FLAT,**STYLE,activebackground="#121212",command= open_url).grid(row=1, column= 2, padx=10, pady=5)
+tk.Button(root,image= questionimage, relief=tk.FLAT,**STYLE_BUTTON, command= open_url).grid(row=1, column= 2, padx=10, pady=5)
 
 tk.Label(root, text="Select Save File:",**STYLE).grid(row=2, column=0, padx=10, pady=5, sticky="w")
 file_var = tk.StringVar()
-tk.Entry(root, textvariable=file_var, width=40, **STYLE).grid(row=2, column=1, padx=10, pady=5)
-tk.Button(root, text="Browse", command=browseFile, **STYLE, activebackground="#121212", activeforeground="#84C9FB").grid(row=2, column=2, padx=10, pady=5)
+tk.Entry(root, textvariable=file_var, width=40, **STYLE_ENTRY,relief= tk.FLAT).grid(row=2, column=1, padx=10, pady=5)
+tk.Button(root, text="Browse", command=browseFile, **STYLE_BUTTON).grid(row=2, column=2, padx=10, pady=5)
 
-tk.Button(root, text="Run Script", command=runScript, **STYLE, activebackground="#121212", activeforeground="#84C9FB").grid(row=3, column=1, pady=20)
+tk.Button(root, text="Run Script", command=runScript, **STYLE_BUTTON).grid(row=3, column=1, pady=20)
 
 root.mainloop()
