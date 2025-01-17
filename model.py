@@ -1,11 +1,8 @@
 import requests
 import re
-import tkinter as tk
-import webbrowser
-from tkinter import filedialog, messagebox, PhotoImage
+from tkinter import messagebox
 
-# file location
-# {steam_installation_path})\Steam\userdata\{user}\250900\remote
+from constants import ALL_CHALLENGES_ACHIEVEMENTS, CHARACTERS_ACHIEVEMENTS
 
 _debug = False
 
@@ -200,7 +197,6 @@ def getAchievements(steam_id, api_key):
         messagebox.showerror("Error", f"An error occurred while fetching the achievements. Please verify your Steam ID and API key.")
         return user_achievements     
         
-
 def isSteamID64(input_value):
     """
     Check if the input is a valid SteamID64.
@@ -242,26 +238,7 @@ def getSteamID64(steam_id, api_key):
 
 # ------------- POST-IT FUNCTIONS -------------
 
-""" checklist_order = [
-    "Mom's Heart", 
-    "Isaac", 
-    "Satan", 
-    "Boss Rush", 
-    "???", 
-    "The Lamb", 
-    "Mega Satan", 
-    "Ultra Greed", 
-    "Ultra Greedier", 
-    "Hush", 
-    "Delirium", 
-    "Mother", 
-    "The Beast"
-] """
-
-__CHARACTERS_ACHIEVEMENTS__ = ['Isaac', '167', '106', '43', '70', '49', '149', '205', '192', '296', '179', '282', '440', '441', 'Magdalene', '168', '20', '45', '109', '50', '71', '206', '193', '297', '180', '283', '442', '443', 'Cain', '171', '21', '46', '110', '75', '51', '207', '194', '298', '181', '284', '444', '445', 'Judas', '170', '107', '72', '108', '77', '52', '208', '195', '299', '182', '285', '446', '447', '???', '174', '29', '48', '114', '113', '73', '209', '196', '300', '183', '286', '448', '449', 'Eve', '169', '76', '44', '112', '53', '111', '210', '197', '302', '184', '288', '450', '451', 'Samson', '177', '54', '56', '115', '55', '74', '211', '198', '301', '185', '287', '452', '453', 'Azazel', '173', '126', '127', '9', '128', '47', '212', '199', '304', '186', '290', '454', '455', 'Lazarus', '172', '116', '117', '105', '118', '119', '213', '200', '305', '187', '291', '456', '457', 'Eden', '176', '121', '122', '125', '123', '124', '214', '201', '303', '188', '289', '458', '459', 'The Lost', '175', '129', '130', '133', '131', '132', '215', '202', '307', '189', '293', '460', '461', 'Lilith', '223', '218', '220', '222', '219', '221', '216', '203', '306', '190', '292', '462', '463', 'Keeper', '241', '236', '237', '240', '238', '239', '217', '204', '308', '191', '294', '464', '465', 'Apollyon', '318', '310', '311', '314', '312', '313', '317', '316', '309', '315', '295', '466', '467', 'Forgotten', '392', '393', '394', '397', '395', '396', '403', '399', '400', '398', '401', '468', '469', 'Bethany', '416', '417', '418', '421', '419', '420', '427', '422', '424', '423', '425', '470', '471', 'Jacob & Esau', '428', '429', '430', '433', '431', '432', '439', '434', '436', '435', '437', '472', '473', 'T Isaac', '548', '548', '548', '618', '548', '548', '601', '541', '541', '618', '584', '549', '491', 'T Magdalene', '550', '550', '550', '619', '550', '550', '602', '530', '530', '619', '585', '551', '492', 'T Cain', '552', '552', '552', '620', '552', '552', '603', '534', '534', '620', '586', '553', '493', 'T Judas', '554', '554', '554', '621', '554', '554', '604', '525', '525', '621', '587', '555', '494', 'T ???', '556', '556', '556', '622', '556', '556', '605', '528', '528', '622', '588', '557', '495', 'T Eve', '558', '558', '558', '623', '558', '558', '606', '527', '527', '623', '589', '559', '496', 'T Samson', '560', '560', '560', '624', '560', '560', '607', '535', '535', '624', '590', '561', '497', 'T Azazel', '562', '562', '562', '625', '562', '562', '608', '539', '539', '625', '591', '563', '498', 'T Lazarus', '564', '564', '564', '626', '564', '564', '609', '543', '543', '626', '592', '565', '499', 'T Eden', '566', '566', '566', '627', '566', '566', '610', '544', '544', '627', '593', '567', '500', 'T Lost', '568', '568', '568', '628', '568', '568', '611', '524', '524', '628', '594', '569', '501', 'T Lilith', '570', '570', '570', '629', '570', '570', '612', '526', '526', '629', '595', '571', '502', 'T Keeper', '572', '572', '572', '630', '572', '572', '613', '536', '536', '630', '596', '573', '503', 'T Apollyon', '574', '574', '574', '631', '574', '574', '614', '540', '540', '631', '597', '575', '504', 'T Forgotten', '576', '576', '576', '632', '576', '576', '615', '537', '537', '632', '598', '577', '505', 'T Bethany', '578', '578', '578', '633', '578', '578', '616', '529', '529', '633', '599', '579', '506', 'T Jacob', '580', '580', '580', '634', '580', '580', '617', '542', '542', '634', '600', '581', '507']
-
-
-__USER_POST_IT__ = {
+USER_POST_IT = {
     'Isaac': [],
     'Magdalene': [],
     'Cain':[],
@@ -299,22 +276,22 @@ __USER_POST_IT__ = {
 }
 
 def updateChecklistArray(data,char_name):
-    if list(__USER_POST_IT__).index(char_name) == 14:
+    if list(USER_POST_IT).index(char_name) == 14:
         clu_ofs = getSectionOffsets(data)[1] + 0x32C
         for i in range(12):
             current_ofs = clu_ofs + i * 4
-            data = alterInt(data, current_ofs, __USER_POST_IT__[char_name][i])
+            data = alterInt(data, current_ofs, USER_POST_IT[char_name][i])
             if i == 8:
                 clu_ofs += 0x4
             if i == 9:
                 clu_ofs += 0x37C
             if i == 10:
                 clu_ofs += 0x84
-    elif list(__USER_POST_IT__).index(char_name) > 14:
+    elif list(USER_POST_IT).index(char_name) > 14:
         clu_ofs = getSectionOffsets(data)[1] + 0x31C
         for i in range(12):
-            current_ofs = clu_ofs + list(__USER_POST_IT__).index(char_name) * 4 + i * 19 * 4
-            data = alterInt(data, current_ofs, __USER_POST_IT__[char_name][i])
+            current_ofs = clu_ofs + list(USER_POST_IT).index(char_name) * 4 + i * 19 * 4
+            data = alterInt(data, current_ofs, USER_POST_IT[char_name][i])
             if i == 8:
                 clu_ofs += 0x4C
             if i == 9:
@@ -324,8 +301,8 @@ def updateChecklistArray(data,char_name):
     else:
         clu_ofs = getSectionOffsets(data)[1] + 0x6C
         for i in range(12):
-            current_ofs = clu_ofs + list(__USER_POST_IT__).index(char_name) * 4 + i * 14 * 4
-            data = alterInt(data, current_ofs, __USER_POST_IT__[char_name][i])
+            current_ofs = clu_ofs + list(USER_POST_IT).index(char_name) * 4 + i * 14 * 4
+            data = alterInt(data, current_ofs, USER_POST_IT[char_name][i])
             if i == 5:
                 clu_ofs += 0x14
             if i == 8:
@@ -337,26 +314,26 @@ def updateChecklistArray(data,char_name):
     return data
 
 def ChecklistAllCharacter(user_achievements):
-    for i in range(len(__CHARACTERS_ACHIEVEMENTS__)):
+    for i in range(len(CHARACTERS_ACHIEVEMENTS)):
         if i % 14 == 0:
-            char = __CHARACTERS_ACHIEVEMENTS__[i]
+            char = CHARACTERS_ACHIEVEMENTS[i]
         elif i % 14 == 8:
             continue
-        elif i % 14 == 9 and __CHARACTERS_ACHIEVEMENTS__[i] in user_achievements:
-            __USER_POST_IT__[char].append(2)
-        elif i % 14 == 9 and __CHARACTERS_ACHIEVEMENTS__[i-1] in user_achievements:
-            __USER_POST_IT__[char].append(1)
-        elif __CHARACTERS_ACHIEVEMENTS__[i] in user_achievements:
-            __USER_POST_IT__[char].append(2)
+        elif i % 14 == 9 and CHARACTERS_ACHIEVEMENTS[i] in user_achievements:
+            USER_POST_IT[char].append(2)
+        elif i % 14 == 9 and CHARACTERS_ACHIEVEMENTS[i-1] in user_achievements:
+            USER_POST_IT[char].append(1)
+        elif CHARACTERS_ACHIEVEMENTS[i] in user_achievements:
+            USER_POST_IT[char].append(2)
         else:
-            __USER_POST_IT__[char].append(0)
+            USER_POST_IT[char].append(0)
     return
 
 def updatePostIt(data, user_achievements):
     ChecklistAllCharacter(user_achievements)
 
     if _debug:
-        for char, post_it_array in __USER_POST_IT__.items():
+        for char, post_it_array in USER_POST_IT.items():
             if char:
                 print(f"Updating {char}'s post-it note")
                 print(post_it_array) 
@@ -364,7 +341,7 @@ def updatePostIt(data, user_achievements):
             else:
                 return
     else:
-        for char in __USER_POST_IT__.keys():
+        for char in USER_POST_IT.keys():
             if char:
                 # print(f"Updating {char}'s post-it note")
                 data = updateChecklistArray(data, char)
@@ -373,17 +350,15 @@ def updatePostIt(data, user_achievements):
     return data
 
 def delUserPostIt():
-    for char in __USER_POST_IT__.keys():
-        del __USER_POST_IT__[char][:]
+    for char in USER_POST_IT.keys():
+        del USER_POST_IT[char][:]
     return
         
 # ------------- CHALLENGES FUNCTIONS -------------
 
-__all_challenges_achievements__ = ['89','90','91','92','93','94','120','96','97','98','99','100','60','63','101','102','103','104','62','95','224','225','226','227','228','229','230','231','232','233','331','332','333','334','335','517','518','519','520','521','522','531','532','533','538']
-
 def updateChallengesArray(data, user_achievements):
     user_achievements_set = set(user_achievements)
-    completed_challenges = [index + 1 for index, achievement in enumerate(__all_challenges_achievements__) if achievement in user_achievements_set]
+    completed_challenges = [index + 1 for index, achievement in enumerate(ALL_CHALLENGES_ACHIEVEMENTS) if achievement in user_achievements_set]
 
     # [index + 1] is used to get the challenge number from the index
 
@@ -393,36 +368,12 @@ def updateChallengesArray(data, user_achievements):
 
     return updateChallenges(data, completed_challenges)
 
-# ------------- GUI -------------
-BACKGROUND= "#313338"
-FONT= ("Candara")
-WIDGET_BACKGROUND= "#404249"
-FONT_COLOR= "white" 
-STYLE = {
-    "font" : FONT,
-    "bg" : BACKGROUND,
-    "fg" : "white"
-    }
-STYLE_ENTRY = {
-    "font" : "Candara",
-    "bg" : WIDGET_BACKGROUND,
-    "fg" : FONT_COLOR
-    }
-STYLE_BUTTON = {
-    "font" : "Candara",
-    "bg" : WIDGET_BACKGROUND,
-    "fg" : FONT_COLOR,
-    "activebackground" : WIDGET_BACKGROUND,
-    "activeforeground" : FONT_COLOR,
-    "cursor" : "hand2"
-    }
-def runScript():
-    steam_id = entry1.get()
-    api_key = entry2.get()
-    file_path = file_var.get()
+# ------------- MAIN FUNCTION -------------
 
-    if not steam_id and not api_key and not file_path:
-        messagebox.showerror("All fields are required!")
+def runScript(steam_id, api_key, file_path):
+
+    if steam_id == "" or api_key == "" or file_path == "":
+        messagebox.showerror("Error", "Please fill in all the fields.")
         return
 
     try:
@@ -458,37 +409,3 @@ def runScript():
             messagebox.showinfo("Success", "Save file synchronized succesfully!")
     except Exception as e:
         messagebox.showerror("Error", f"An error occurred while fetching the achievements. Please verify your Steam ID and API key.")
-
-def browseFile():
-    file_path = filedialog.askopenfilename(filetypes=[("DAT Files", "*.dat"), ("All Files", "*.*")])
-    if file_path:
-        file_var.set(file_path)
-
-# main Tkinter window
-
-def open_url():
-    webbrowser.open('https://github.com/agusaenz/isaac-save-auto-editor-steam?tab=readme-ov-file#4-obtain-a-steam-web-api-key')
-root = tk.Tk()
-root.title("Post-it for Dummies")
-root.configure(bg=BACKGROUND)
-root.iconbitmap(r"assets\rune_05_ansuz.ico")
-
-# GUI elements
-tk.Label(root, text="Steam ID:",**STYLE).grid(row=0, column=0, padx=10, pady=5, sticky="w")
-entry1 = tk.Entry(root, width=40, **STYLE_ENTRY,relief= tk.FLAT)
-entry1.grid(row=0, column=1, padx=10, pady=5,)
-
-tk.Label(root, text="Steam Web API key:",**STYLE).grid(row=1, column=0, padx=10, pady=5, sticky="w")
-entry2 = tk.Entry(root, width=40,**STYLE_ENTRY,relief= tk.FLAT)
-entry2.grid(row=1, column=1, padx=10, pady=5)
-questionimage = PhotoImage(file=r"assets\questionmark.png")
-tk.Button(root,image= questionimage, relief=tk.FLAT,**STYLE_BUTTON, command= open_url).grid(row=1, column= 2, padx=10, pady=5)
-
-tk.Label(root, text="Select Save File:",**STYLE).grid(row=2, column=0, padx=10, pady=5, sticky="w")
-file_var = tk.StringVar()
-tk.Entry(root, textvariable=file_var, width=40, **STYLE_ENTRY,relief= tk.FLAT).grid(row=2, column=1, padx=10, pady=5)
-tk.Button(root, text="Browse", command=browseFile, **STYLE_BUTTON).grid(row=2, column=2, padx=10, pady=5)
-
-tk.Button(root, text="Run Script", command=runScript, **STYLE_BUTTON).grid(row=3, column=1, pady=20)
-
-root.mainloop()
