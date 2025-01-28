@@ -1,7 +1,7 @@
 # Post-it for Dummies
 Post-it for Dummies is a The Binding of Isaac: Repentance and Repentance+ tool that automatically edits your save file **based on your Steam achievements** for the game, by using the Steam Web API. It will properly set your **post-it notes** for each character (normal and tainted), as well as your **challenges**, all acording to your Steam achievements.
 
-This is an application of the old editor from Afterbirth https://moddingofisaac.com/mod/3236/afterbirth-save-editor-v10
+This is an application based on the old editor from Afterbirth https://moddingofisaac.com/mod/3236/afterbirth-save-editor-v10
     
 **Please read this to the end, as I will be going through every detail, doing a step by step guide and addressing known "issues".**
 
